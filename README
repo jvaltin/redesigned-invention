@@ -1,0 +1,38 @@
+Build Shift Crypto's software, packages, and firmware
+
+Tested on:
+
+  Ubuntu Xenial
+
+Using Docker running a container with:
+
+  Debian Stretch
+
+Install Docker:
+
+  make docker-install
+
+Build everything:
+
+  make
+
+Selectively build smaller pieces with other Makefile targets.
+
+  Create the base container:
+
+    make build-world
+
+  Build the DBBv1 firmware:
+
+    make build-mcu
+
+  Build the BitBox Wallet application packages for X86_64 GNU/Linux:
+
+    make build-bitbox-wallet-app
+
+  Build the 2fa Android package:
+
+    # first download the 2FA-app-hmac_bitbox.zip file
+    # and place it in src/
+    make build-2fa
+
