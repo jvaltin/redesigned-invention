@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 cd /opt/src/mcu
 rm -rf build
 mkdir build && cd build

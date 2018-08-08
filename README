@@ -31,3 +31,11 @@ Selectively build smaller pieces with other Makefile targets.
 
     make build-2fa
 
+  Build the html_backup repo:
+
+    make build-htmlbackup
+
+  Build the ElectronDemo application:
+
+    make build-electrondemo
+

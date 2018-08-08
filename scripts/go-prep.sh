@@ -2,6 +2,8 @@
 #
 # This script runs inside of a Docker container
 
+set -e
+
 go get -u gopkg.in/alecthomas/gometalinter.v1
 gometalinter.v1 --install
 go get -u github.com/golang/dep/cmd/dep

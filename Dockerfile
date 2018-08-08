@@ -4,12 +4,10 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get install -y --no-install-recommends apt-transport-https apt-utils ca-certificates gnupg wget
 WORKDIR /app
 COPY . /app
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 RUN cd /opt && \
     wget -c https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage && \
     echo 'c068b019a2bdb616df84775054d4149ea1832ace5db1f95e0e417ef27e01f980 /opt/linuxdeployqt-continuous-x86_64.AppImage' | sha256sum -c - && \
     chmod +x /opt/linuxdeployqt-continuous-x86_64.AppImage
-RUN apt-key add /app/keys/yarn.gpg
 RUN apt-get install -y --no-install-recommends \
 	astyle \
 	bash-completion  \
@@ -48,6 +46,7 @@ RUN apt-get install -y --no-install-recommends \
 	libegl1-mesa-dev  \
 	libfontconfig1-dev \
 	libfreetype6-dev \
+        libgconf-2-4 \
 	libgcrypt11-dev \
 	libgl1-mesa-dev \
 	libglu1-mesa-dev \
@@ -106,16 +105,26 @@ RUN apt-get install -y --no-install-recommends \
 	wget \
 	&& apt-get autoremove && apt-get clean
 
-RUN gem install --no-ri --no-rdoc fpm
+RUN apt-key add /app/keys/yarn.gpg
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y --no-install-recommends yarn
+RUN gem install --no-ri --no-rdoc fpm
 
 ENV GOPATH /opt/go
 ENV GOROOT /usr/lib/go-1.10/
-ENV PATH /usr/lib/go-1.10/bin:/bin:$GOROOT/bin:$GOPATH/bin:/opt/qt5/bin:$PATH
+ENV PATH /usr/lib/jvm/java-8-openjdk-amd64/bin/:/usr/lib/go-1.10/bin:/bin:$GOROOT/bin:$GOPATH/bin:/opt/qt5/bin:$PATH
+
+RUN /app/scripts/nodejs-install.sh
+RUN /app/scripts/android-sdk.sh
+
+ENV JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
+ENV ANDROID_HOME="/usr/lib/android-sdk"
 
 RUN /app/scripts/go-prep.sh
 RUN /app/scripts/source-checkout.sh
+
 COPY src/ /opt/src/
+
 ENV CC /bin/clang
 ENV CXX /bin/clang++;
 ENV ARCH x86_64

@@ -1,0 +1,10 @@
+index 8d73d75..b63cf82 100755
+--- a/frontends/qt/resources/deb-afterinstall.sh
++++ b/frontends/qt/resources/deb-afterinstall.sh
+@@ -6,3 +6,6 @@ printf "KERNEL==\"hidraw*\", SUBSYSTEM==\"hidraw\", ATTRS{idVendor}==\"03eb\", A
+ 
+ udevadm control --reload
+ udevadm trigger
++
++echo "/opt/bitbox" > /etc/ld.so.conf.d/bitbox.conf
++ldconfig
