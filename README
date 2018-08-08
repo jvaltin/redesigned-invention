@@ -10,7 +10,7 @@ Using Docker running a container with:
 
 Install Docker:
 
-  make docker-install
+  make install-docker
 
 Build everything:
 
