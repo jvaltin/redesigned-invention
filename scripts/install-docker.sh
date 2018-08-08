@@ -7,10 +7,11 @@
 set -e
 
 RELEASE=$(lsb_release -cs)
+DISTRO=$(lsb_release -is|tr [:upper:] [:lower:])
 apt install -y apt-transport-https ca-certificates curl \
 	           software-properties-common
 apt-key add keys/docker.gpg
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable"
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$DISTRO $RELEASE stable"
 apt update
 apt install -y docker-ce
 docker run hello-world
