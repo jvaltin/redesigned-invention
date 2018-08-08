@@ -1,11 +1,8 @@
 Build Shift Crypto's software, packages, and firmware
 
-Tested on:
+Tested, functional, and expected to produce builds on these platforms:
 
   Ubuntu Xenial
-
-Using Docker running a container with:
-
   Debian Stretch
 
 Install Docker:
@@ -32,7 +29,5 @@ Selectively build smaller pieces with other Makefile targets.
 
   Build the 2fa Android package:
 
-    # first download the 2FA-app-hmac_bitbox.zip file
-    # and place it in src/
     make build-2fa
 
