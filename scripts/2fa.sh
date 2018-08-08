@@ -14,7 +14,7 @@ apt install -y -t unstable openjdk-8-jdk-headless openjdk-8-jre-headless
 apt install -y -t unstable android-platform-tools-base android-sdk 
 apt install -y -t unstable android-sdk-helper
 
-cd /opt/src/2FA-app-hmac_bitbox/
+cd /opt/src/2FA-app/
 npm install -g cordova
 npm install -g bitcore-lib
 npm install -g buffer-reverse
@@ -31,7 +31,7 @@ echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "/usr/lib/android-sdk/lic
 echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" >> "/usr/lib/android-sdk/licenses/android-sdk-license"
 
 # Patch up platforms/android/app/build.gradle
-cd /opt/src/2FA-app-hmac_bitbox/platforms/android/app/ && patch < /opt/src/2Fa-gradle.patch
+cd /opt/src/2FA-app/platforms/android/app/ && patch < /opt/src/2Fa-gradle.patch
 
 browserify www/js/main_new.js -o www/js/app_new.js && \
    browserify www/js/init.js -o www/js/app_init.js && \
@@ -39,4 +39,4 @@ browserify www/js/main_new.js -o www/js/app_new.js && \
 
 cordova build android
 cordova build browser
-cp /opt/src/2FA-app-hmac_bitbox/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/build-output/2FA-app-debug.apk
+cp /opt/src/2FA-app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/build-output/2FA-app-debug.apk

@@ -5,7 +5,6 @@ build: build-world build-mcu build-bitbox-wallet-app build-2fa
 build-world:
 	- mkdir build-output
 	docker run hello-world
-	cd src && rm -rf 2FA-app-hmac_bitbox && unzip 2FA-app-hmac_bitbox.zip && cd ../;
 	docker build --pull -t build-world .
 
 install-docker:
