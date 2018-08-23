@@ -1,0 +1,20 @@
+sudo: required
+
+language: bash
+
+services:
+  - docker
+
+addons:
+  apt:
+    update: true
+    packages:
+      - docker-ce
+      - make
+
+jobs:
+  include:
+    - stage: docker init
+      script: make build-world
+    - stage: build linux
+      script: make build
