@@ -12,9 +12,16 @@ addons:
       - docker-ce
       - make
 
+before_install:
+- make build-world
+
 jobs:
   include:
-    - stage: docker init
-      script: make build-world
-    - stage: build linux
-      script: make build
+    - stage: build mcu
+      script: make build-mcu
+    - stage: build-2fa
+      script: make build-2fa
+    - stage: build-htmlbackup
+      script: make build-htmlbackup
+    - stage: build bitbox-wallet-app
+      script: make build-bitbox-wallet-app
