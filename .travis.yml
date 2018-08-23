@@ -12,7 +12,7 @@ addons:
       - docker-ce
       - make
 
-before_install:
+install:
 - make build-world
 
 jobs:
